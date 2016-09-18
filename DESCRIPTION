@@ -1,6 +1,6 @@
 Package: clusty
 Type: Package
-Title: Evluate clustering using distance heat maps
+Title: Evaluate clustering using distance heat maps
 Version: 1.0
 Date: 2016-09-15
 Author: Jonathan Bourne and Derek Lukacsko
