@@ -52,6 +52,10 @@ Derek Lukacsko & Jonathan Bourne
 bigextract, bigheat
 }
 \examples{
+# Load necessary packages
+library(dplyr)
+library(tidyr)
+
 # Data frame of features
 df <- iris[,c(1:3)]
 
