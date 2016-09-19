@@ -42,6 +42,11 @@ Dataframe where each instance corresponds to a square of the distance matrix. Co
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
+# Load necessary packages
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
 # Data frame of features
 df <- iris[,c(1:3)]
 
