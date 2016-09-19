@@ -54,6 +54,11 @@ Derek Lukacsko & Jonathan Bourne
 bigextract, summaryheat
 }
 \examples{
+# Load necessary packages
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
 # Data frame of features
 df <- iris[,c(1:3)]
 
