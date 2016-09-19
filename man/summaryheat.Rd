@@ -67,7 +67,7 @@ fit <- kmeans(df, k)
 df$Cluster = fit$cluster
 
 # Visualize using summaryheat
-sumnmaryheat(df, compare_metric = "Median")
+summaryheat(df, compare_metric = "Median")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
