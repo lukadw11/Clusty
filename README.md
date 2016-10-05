@@ -1,8 +1,5 @@
 # Clusty
 
-## Use Package in R
-install_github("lukadw11/clusty")
-
 ## Overview
 The **clusty** package is used for evaluating partitioning-based clustering with non-overlapping cluster membership in R programming language. Specifically, it was designed for assessing K-Means clustering using distance matrix heat maps as the objective function is based on distance. Effective clustering is thus where instances within clusters are significantly similar and instances between clusters are significantly differentiated. Thus, using a heat map of cluster distance, a highly ranked diagonal in the summaryheat is characterized by strong intra-cluster homogeneity; a highly ranked upper or lower triangle of the heat map is characterized by strong inter-cluster heterogeneity. The distance metrics used for this heat map can be extracted and inspected using bigextract. Rather than summarizing the average distance within clusters, bigheat uses condensed instance vectors to visualize the clustering (i.e. intra-cluster homogeneity and inter-cluster heterogeneity) at the instance level. This provides a granular look at how well differentiated instance vectors are within and between clusters. 
 
@@ -12,6 +9,9 @@ The **clusty** package is used for evaluating partitioning-based clustering with
 - **summaryheat:** While bigheat provides a visual assessment for granular instance-level clustering, summaryheat, in contrast, takes the underlying structure of the large distance matrix used to create bigheat to visually summarize the level of differentiation between clusters and similarity within clusters. *Which clusters have instances that are the most similar (i.e. the smallest WCSS)? Which clusters are most differentiated (i.e. in comparing instances in clusters X and Y, how different are they overall?)?* Summaryheat ranks the diagonal of the distance heat map by the most to the least homogenous; thus, rank 1 corresponds to the cluster with the most similar instance vectors. The diagonal of the matrix in contrast is ranked by the level of heterogeneity or differentiation; thus, rank 1 corresponds to the most significantly differentiated pair of clusters. This is useful because we cannot infer differentiation directly from the level of similarity within a cluster. 
 ![summaryheat_sample](https://cloud.githubusercontent.com/assets/16897939/18616789/85abc72e-7db9-11e6-962d-08586f505d3a.png)
 - **bigextract:** Each square within the distance heat map corresponds to instance vectors either between clusters or within a single cluster. The metrics used to compare these vectors in summaryheat can be extracted using bigextract. While the previous two functions create heat maps, bigextract produces a data frame where each instance corresponds to a square of the heat matrix and the corresponding distance metrics derived from the feature vectors.
+
+## Use Package in R
+install_github("lukadw11/clusty")
 
 ## License
 This package is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License, version 3, as published by the Free Software Foundation. This program is distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the GNU General Public License for more details. A copy of the GNU General Public License, version 3, is available at http://www.r-project.org/Licenses/GPL-3
