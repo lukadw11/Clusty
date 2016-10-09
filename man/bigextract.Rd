@@ -24,7 +24,7 @@ bigextract(df, output = "full", dist_metric = "euclidean")
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-Dataframe where each instance corresponds to a square of the distance matrix. Columns contain the mean, standard deviation, range, and median distance between (triangular matrices) and within clusters (diaganol), as well as the number of instances begin compared (Size), and where the square lies on the matrix (diaganol or triangle). The size of diaganol comparisons correponds to the number of instances in that cluster. The size of the triangle comparisons corresponds to the sum of the number of instances being compared.
+Dataframe where each instance corresponds to a square of the distance matrix. Columns contain the mean, standard deviation, range, and median distance between (triangular matrices) and within clusters (diaganol), as well as the number of instances begin compared (Size), and where the square lies on the matrix (diaganol or triangle). The size of diaganol comparisons correponds to the number of instances in that cluster. The size of the triangle comparisons corresponds to the sum of the number of instances being compared to each other. Intuitively, the size/instances being compared in the diaganols will be larger because two clusters are being compared to each other. The "pair" column corresponds to which two clusters are being compared where the first cluster corresponds to the row (y) of the summaryheat output and the second cluster corresponds to the column (x) of the summaryheat output.
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -42,11 +42,6 @@ Dataframe where each instance corresponds to a square of the distance matrix. Co
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-# Load necessary packages
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-
 # Data frame of features
 df <- iris[,c(1:3)]
 
