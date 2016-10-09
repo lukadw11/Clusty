@@ -37,7 +37,7 @@ bigextract<-function(df, output="full", dist_metric = "euclidean"){
     rectangles[[i]] = subset.matrix(g, select = c(clustvect[i]:clustvect[i+1]))
   }
   
-  #Extract the cluster relationships (squares)
+  #Extract the cluster relationship pairs (squares)
   blocks = list()
   k = 1
   for(i in 1:clusts){
@@ -79,7 +79,10 @@ bigextract<-function(df, output="full", dist_metric = "euclidean"){
     All_clustering[i,5] = NROW(inter_df)
   }
   
-  All_clustering <- All_clustering %>% mutate(Position = character(squares))
+  All_clustering <- All_clustering %>% mutate(Position = character(squares),
+                                              Pair = character(squares))
+  
+  #Assign "Position" column vector with either diaganol or triangle
   for(i in 1:squares){
     All_clustering[i,6] <- if(is.element(i,Diag) == TRUE){
       "diaganol"
@@ -87,6 +90,12 @@ bigextract<-function(df, output="full", dist_metric = "euclidean"){
       "triangle"
     }
   }
+  
+  #Assign "Pair" column vector with the two clusters being compared
+  rowClusts = rep(1:clusts, times = clusts)
+  colClusts = rep(1:clusts, each = clusts)
+  All_clustering[,7] <- paste(rowClusts, colClusts)
+  
   
   #Metrics of cluster observations
   Intra_clustering = All_clustering[Diag,] %>% 
@@ -96,7 +105,7 @@ bigextract<-function(df, output="full", dist_metric = "euclidean"){
            Median = Median/median(g), 
            Size = Size)
   
-  # Alter triangle populations to include customers in both clusters (triangle + diangonal)
+  #Alter triangle populations to include customers in both clusters (triangle + diangonal)
   z = rep(1:(clusts), times = clusts) #positions in grid/triangles where population needs to be appended
   for(i in 1:squares){
     if(All_clustering[i,"Position"] == "triangle"){
