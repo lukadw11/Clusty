@@ -1,6 +1,5 @@
 library(tidyr)
 library(dplyr)
-library(ggplot2)
 # Takes same dataframe as bigheat
 # output = "triangle" extracts only the comparison squares (i.e. the lower and upper triangular matrices), "diagonal" extracts only the diagonal
 # dist_metric = measures of distance for dist
