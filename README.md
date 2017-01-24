@@ -11,7 +11,6 @@ The **clusty** package is used for evaluating distance-based clustering with non
 ![summaryheat_sample](https://cloud.githubusercontent.com/assets/16897939/18616789/85abc72e-7db9-11e6-962d-08586f505d3a.png)
 
 - **bigextract:** Each square within the distance heat map output from summaryheat corresponds to a group of instance vectors either between clusters or within a single cluster. The metrics used to compare these squares in summaryheat can be extracted using bigextract (e.g. mean distance between instance vectors, the number of instances being compared, etc.). While the previous two functions create heat maps, bigextract produces a data frame where each instance corresponds to a square of the heat matrix from summaryheat and the corresponding distance metrics derived from the feature vectors.
-![bigextract_samples](C://Users//Derek//Desktop//summaryheatp.png)
 
 ## Use Package in R
 install_github("lukadw11/clusty") #package "devtools" must be downloaded first
