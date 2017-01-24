@@ -1,13 +1,17 @@
 library(tidyr)
 library(dplyr)
+library(ggplot2)
+library(plotly)
 # Takes same dataframe as bigheat and bigextract
 # metric = what to rank the squares by; mean = "Mean", standard deviation = "Sd", range = "Range", median = "Median"
+# interactive = logical argument
 summaryheat<-function(df, 
                       compare_metric = "Mean",
                       ranks = TRUE,
                       dist_metric = "euclidean", 
                       axislabs = "Aggregated Cluster Distance",
-                      title = "Differentiation Rank"){
+                      title = "Differentiation Rank",
+                      iteractive = FALSE){
   
   #Working data frame
   df <- df %>% arrange(as.numeric(Cluster))
@@ -171,7 +175,7 @@ summaryheat<-function(df,
   #Save memory  
   remove(g,block,rectangles) 
   
-  ggplot(plot_df, aes(key,value, fill = plot_df[compare_metric])) + 
+  daPlot <- ggplot(plot_df, aes(key,value, fill = plot_df[compare_metric])) + 
     geom_raster() + 
     scale_fill_gradient2(low="blue",mid = "white" ,high = "red", 
                          midpoint = mean(plot_df[,compare_metric]), 
@@ -185,5 +189,12 @@ summaryheat<-function(df,
     annotate("text", x = rep(1:clusts,times = clusts), 
              y = rep(1:clusts, each = clusts), 
              label = square_labs)
+  
+  #interactive heat map
+  if(interactive){
+    return(ggplotly(daPlot))
+  }else{
+    return(daPlot)
+  }
   
 }

@@ -1,6 +1,7 @@
 library(tidyr)
 library(dplyr)
 library(ggplot2)
+library(plotly)
 #df = data frame with features and clusters; Cluster column must be named "Cluster" and contain integers correpsonding to cluster IDs, must be the last column. The feature vectors must all be numeric so a measure of distance can be used to create matrices
 #order_diag = logical argument; order the gradient of observations within each cluster
 #merge = the number of cell in the x and y direction to merge, merging on a high number of cells will reduce memory requirements at the cost of reduced granularity in the visualization
@@ -8,13 +9,15 @@ library(ggplot2)
 #legend = plot legend label
 #axislabs = plot axis labels
 #title = plot title label
+#interactive = logical argument
 bigheat <-function(df, 
                    order_diag = FALSE, 
                    merge = 10,
                    dist_metric = "euclidean", 
                    legend = "Distance", 
                    axislabs = "Condensed Distance Vectors", 
-                   title = "Cluster Differentiation"){
+                   title = "Cluster Differentiation",
+                   iteractive = FALSE){
   df <- df %>% arrange(as.numeric(Cluster))
   
   #Create cluster dilemetters
@@ -113,7 +116,7 @@ bigheat <-function(df,
   print("Creating Plot")
   
   ##PLOTTING##
-  ggplot(test, aes(x=columnID, y=rowID, fill = Percentvalid )) +
+  daPlot <- ggplot(test, aes(x=columnID, y=rowID, fill = Percentvalid )) +
     geom_raster() + 
     scale_fill_gradient2(low="blue",mid = "white" ,high = "red", midpoint = mean(g_plot),name=legend) +
     theme_minimal() +
@@ -122,4 +125,12 @@ bigheat <-function(df,
     labs(title = title, x = axislabs, y = axislabs) +
     scale_x_continuous(breaks = (labelvect/merge)[-1],labels = clus_labs) +
     scale_y_continuous(breaks = (labelvect/merge)[-1],labels = clus_labs)
+  
+  #interactive heat map
+  if(interactive){
+    return(ggplotly(daPlot))
+  }else{
+    return(daPlot)
+  }
+  
 }
