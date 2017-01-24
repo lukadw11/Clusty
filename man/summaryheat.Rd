@@ -7,7 +7,7 @@ Within-cluster homogeneity and between-cluster heterogeneity plot
 This function takes a data frame of instances characterized by cluster IDs, condenses the instance vectors, creates a distance matrix between each instance grouped by cluster, and visualizes the clustering summary using a heat map gradient from very similar (blue) to very different (red). The diagonal is then ranked by most to least homogeneous cluster. The upper and lower symmetrical triangular matrices are ranked by most to least heterogeneous. The intuition is that a highly homogeneous cluster (i.e. with similar instances) corresponds to strong clustering, and likewise with highly differentiated cluster comparisons.
 }
 \usage{
-summaryheat(df, compare_metric = "Mean", ranks = TRUE, dist_metric = "euclidean", axislabs = "Aggregated Cluster Distance", title = "Differentiation Rank")
+summaryheat(df, compare_metric = "Mean", ranks = TRUE, dist_metric = "euclidean", axislabs = "Aggregated Cluster Distance", title = "Differentiation Rank", interactive = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +28,9 @@ summaryheat(df, compare_metric = "Mean", ranks = TRUE, dist_metric = "euclidean"
 }
   \item{title}{
 (OPTIONAL) Character argument of the plot title.
+}
+\item{interactive}{
+(OPTIONAL) Logical argument to enable plotly's ggplotly function. 
 }
 }
 \details{
@@ -52,10 +55,6 @@ Derek Lukacsko & Jonathan Bourne
 bigextract, bigheat
 }
 \examples{
-# Load necessary packages
-library(dplyr)
-library(tidyr)
-
 # Data frame of features
 df <- iris[,c(1:3)]
 
@@ -67,7 +66,7 @@ fit <- kmeans(df, k)
 df$Cluster = fit$cluster
 
 # Visualize using summaryheat
-summaryheat(df, compare_metric = "Median")
+sumnmaryheat(df, compare_metric = "Median")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

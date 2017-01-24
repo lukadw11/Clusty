@@ -7,7 +7,7 @@ High-dimensional cluster distance heat matrix
 This function takes a data frame of instances characterized by cluster IDs, condenses the instance vectors, creates a distance matrix between each instance grouped by cluster, and visualizes the clustering using a heat map color gradient from very similar (i.e. blue; low distance) to very dissimilar (i.e. red; high distance).
 }
 \usage{
-bigheat(df, order_diag = FALSE, merge = 10, dist_metric = "euclidean", legend = "Distance", axislabs = "Condensed Distance Vectors", title = "Cluster Differentiation")
+bigheat(df, order_diag = FALSE, merge = 10, dist_metric = "euclidean", legend = "Distance", axislabs = "Condensed Distance Vectors", title = "Cluster Differentiation", interactive = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -30,6 +30,9 @@ bigheat(df, order_diag = FALSE, merge = 10, dist_metric = "euclidean", legend = 
 (OPTIONAL) Character argument of the plot axis labels (note: one argument)
 }\item{title}{
 (OPTIONAL) Character argument of the plot title.
+}
+\item{interactive}{
+(OPTIONAL) Logical argument to enable plotly's ggplotly function. 
 }
 }
 \details{
@@ -54,11 +57,6 @@ Derek Lukacsko & Jonathan Bourne
 bigextract, summaryheat
 }
 \examples{
-# Load necessary packages
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-
 # Data frame of features
 df <- iris[,c(1:3)]
 
