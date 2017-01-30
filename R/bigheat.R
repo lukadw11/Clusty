@@ -17,7 +17,7 @@ bigheat <-function(df,
                    legend = "Distance", 
                    axislabs = "Condensed Distance Vectors", 
                    title = "Cluster Differentiation",
-                   iteractive = FALSE){
+                   interactive = FALSE){
   df <- df %>% arrange(as.numeric(Cluster))
   
   #Create cluster dilemetters
