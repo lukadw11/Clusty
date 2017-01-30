@@ -127,7 +127,7 @@ bigheat <-function(df,
     scale_y_continuous(breaks = (labelvect/merge)[-1],labels = clus_labs)
   
   #interactive heat map
-  if(interactive){
+  if(interactive == TRUE){
     return(ggplotly(daPlot))
   }else{
     return(daPlot)
