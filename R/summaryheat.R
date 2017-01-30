@@ -11,7 +11,7 @@ summaryheat<-function(df,
                       dist_metric = "euclidean", 
                       axislabs = "Aggregated Cluster Distance",
                       title = "Differentiation Rank",
-                      iteractive = FALSE){
+                      interactive = FALSE){
   
   #Working data frame
   df <- df %>% arrange(as.numeric(Cluster))
@@ -191,7 +191,7 @@ summaryheat<-function(df,
              label = square_labs)
   
   #interactive heat map
-  if(interactive){
+  if(interactive == TRUE){
     return(ggplotly(daPlot))
   }else{
     return(daPlot)
