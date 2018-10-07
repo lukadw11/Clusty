@@ -15,6 +15,7 @@ The **clusty** package is used for evaluating distance-based clustering with non
 
 ## Use Package in R
 install.packages("devtools")
+
 install_github("lukadw11/clusty")
 
 ## License
