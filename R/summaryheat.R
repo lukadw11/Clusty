@@ -1,10 +1,9 @@
 library(tidyr)
 library(dplyr)
 library(ggplot2)
-library(plotly)
-# Takes same dataframe as bigheat and bigextract
+library(scales)
+# Takes same dataframe input as bigheat and bigextract
 # metric = what to rank the squares by; mean = "Mean", standard deviation = "Sd", range = "Range", median = "Median"
-# interactive = logical argument
 summaryheat<-function(df, 
                       compare_metric = "Mean",
                       ranks = TRUE,
@@ -13,8 +12,11 @@ summaryheat<-function(df,
                       title = "Differentiation Rank",
                       interactive = FALSE){
   
-  #Working data frame
-  df <- df %>% arrange(as.numeric(Cluster))
+  #Sample data frame structure
+  # df <- iris[,-5]
+  # cluster_obj <- kmeans(df, centers=4)
+  # df$Cluster <- cluster_obj$cluster
+  # df <- df %>% arrange(as.numeric(Cluster))
   
   #Create cluster dilemetters
   clusts = length(unique(df$Cluster))
@@ -57,11 +59,12 @@ summaryheat<-function(df,
     }
   }
   print("Cluster relationships determined")
+  length(as.data.frame(lapply(blocks, dim))) #DELETE
   
   #Number of squares/comparisons
   squares = clusts^2
   
-  #Data frame that contains metrics for all observations (all squares)
+  #Empty data frame containing metrics for all squares
   All_clustering = data.frame(Mean = numeric(squares), 
                               Sd = numeric(squares), 
                               Range = numeric(squares), 
@@ -95,16 +98,13 @@ summaryheat<-function(df,
     clus_labs[i]<- paste("C",i,sep="")
   }
   
-  #Dilemeters
-  dil = max(clusts)-1
-  
   #Dataframe with aggregated metrics to create heat map ranks
   plot_df <- All_clustering %>% 
     mutate(value = rep(1:clusts,times=clusts), 
            key = rep(1:clusts,each=clusts),
            rank = numeric(1))
-  
-  #Paul Hiemstra: May 10, 2013
+
+  #Paul Hiemstra: May 10, 2013 #IMPLEMENT LESS COSTLY SORTING ALGORITHM
   larger = function(pair) {
     if(pair[1] > pair[2]) return(TRUE) else return(FALSE)
   }
@@ -173,13 +173,14 @@ summaryheat<-function(df,
   }
   
   #Save memory  
-  remove(g,block,rectangles) 
+  remove(g,block,rectangles)
+
+  Diff = rescale(plot_df[compare_metric]$Mean) #normalize 0-1 for coloring
   
-  daPlot <- ggplot(plot_df, aes(key,value, fill = plot_df[compare_metric])) + 
-    geom_raster() + 
-    scale_fill_gradient2(low="blue",mid = "white" ,high = "red", 
-                         midpoint = mean(plot_df[,compare_metric]), 
-                         name=compare_metric) +
+  daPlot <- ggplot(plot_df, aes(key,value, fill = Diff )) + 
+    geom_raster() +
+    scale_fill_gradient2(low="blue",mid = "white", high = "red", space = "rgb", 
+                         midpoint = mean(Diff), label=NULL) +
     theme_minimal() + 
     geom_hline(yintercept = 0.5+(0:(clusts))) +
     geom_vline(xintercept = 0.5+(0:(clusts))) +
@@ -188,13 +189,8 @@ summaryheat<-function(df,
     scale_y_continuous(breaks = 1:clusts,labels = clus_labs) + 
     annotate("text", x = rep(1:clusts,times = clusts), 
              y = rep(1:clusts, each = clusts), 
-             label = square_labs)
+             label = as.character(square_labs))
   
-  #interactive heat map
-  if(interactive == TRUE){
-    return(ggplotly(daPlot))
-  }else{
-    return(daPlot)
-  }
+  return(daPlot)
   
 }
