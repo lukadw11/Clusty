@@ -29,9 +29,6 @@ summaryheat(df, compare_metric = "Mean", ranks = TRUE, dist_metric = "euclidean"
   \item{title}{
 (OPTIONAL) Character argument of the plot title.
 }
-\item{interactive}{
-(OPTIONAL) Logical argument to enable plotly's ggplotly function. 
-}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
