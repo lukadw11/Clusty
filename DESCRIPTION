@@ -3,7 +3,7 @@ Type: Package
 Title: Evaluate clustering using distance heat maps
 Version: 1.0
 Date: 2016-09-15
-Author: Jonathan Bourne and Derek Lukacsko
+Author: Derek Lukacsko
 Maintainer:  Derek Lukacsko <derek.lukacsko@gmail.com>
 Description: This package contains three functions for evaluating clustering: summaryheat, bigextract, and bigheat. 
 Imports: ggplot2, tidyr, dplyr
